@@ -9,8 +9,8 @@ import Player from '../pages/Player';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/team" exact component={Team} />
-    <Route path="/player" exact component={Player} />
+    <Route path="/team/:team_id" exact component={Team} />
+    <Route path="/player/:player_id" exact component={Player} />
   </Switch>
 );
 

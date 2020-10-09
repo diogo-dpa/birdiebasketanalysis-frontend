@@ -9,14 +9,7 @@ export default createGlobalStyle`
     outline: 0;
   }
 
-  html, #root{
-    width: 100vw;
-    height: 100vh;
-  }
-
   body {
-    width: 100vw;
-    height: 100%;
     background: #fff;
     -webkit-font-smoothing: antialiased;
   }
