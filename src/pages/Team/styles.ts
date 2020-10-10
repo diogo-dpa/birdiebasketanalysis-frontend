@@ -33,6 +33,10 @@ export const Container = styled.div`
             display: flex;
             flex-direction: column;
 
+            h2{
+                padding: 15px 0;
+            }
+
             .showPlayers{
                 display: flex;
                 flex-direction: row;
@@ -41,9 +45,66 @@ export const Container = styled.div`
 
         }
 
+        .infoTeam{
+            width: 100%;
+            height: auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            padding: 35px 0;
+
+            .upperInfo{
+                width: 80%;
+                height: 50%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 30px;
+            }
+
+            .lowerInfo{
+                width: 80%;
+                height: 50%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .metrics{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                & + .metrics{
+                    margin-left: 30px;
+                }
+
+                strong{
+                    font-size: 30px;
+                    font-weight: 600;
+                }
+            }
+        }
+
         .analysisSection{
             width: 100%;
             height: 400px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .analysisTitle{
+                font-size: 40px;
+                font-weight: 600;
+            }
+
+            .chartSection{
+                width: 100%;
+            }
 
         }
 
@@ -52,6 +113,12 @@ export const Container = styled.div`
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            margin-top: 20px;
+
+            h2{
+                text-align: left;
+            }
         }
     }
 `;

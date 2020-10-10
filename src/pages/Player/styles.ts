@@ -45,10 +45,68 @@ export const Container = styled.div`
         .playerData{
             width: 100%;
 
+            .info{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                padding: 15px 0;
+
+                .metrics{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    & + .metrics{
+                        margin-left: 45px;
+                    }
+
+                    strong{
+                        font-size: 30px;
+                        font-weight: 600;
+                    }
+                }
+            }
         }
         .playerStats{
             width: 100%;
 
+            .infoPlayer{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0;
+
+                .upperInfo, .lowerInfo{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .lowerInfo{
+                    margin-top: 20px;
+                }
+
+                .metrics{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    & + .metrics{
+                        margin-left: 45px;
+                    }
+
+                    strong{
+                        font-size: 30px;
+                        font-weight: 600;
+                    }
+                }
+            }
         }
     }
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -13,15 +13,9 @@ interface DataProps{
     last_name: string,
     position: string,
     college: string,
-    height: string,
+    height: number,
     weight: number,
     injury_status: string,
-    thirdMetricNumber: number,
-    thirdMetricInfo: string,
-    fourthMetricNumber: number,
-    fourthMetricInfo: string,
-    fivethMetricNumber: number,
-    fivethMetricInfo: string,
 }
 
 interface IRowInfoProps{
@@ -39,15 +33,19 @@ const RowInfo: React.FC<IRowInfoProps> = ( { data, firstSelected,
                         setFirstPlayerToCompare, setSecondPlayerToCompare} : IRowInfoProps ) => {
 
     const playerSelectedByClick = (player_id: number) => {
-        setFirstSelected(!firstSelected);
-        setSecondSelected(!secondSelected);
-
-        if(firstSelected){
-            setFirstPlayerToCompare(player_id)
-        }
-        if(secondSelected){
+        
+        if(!firstSelected && !secondSelected){
+            setFirstSelected(!firstSelected);
+            setFirstPlayerToCompare(player_id);
+        }else if(firstSelected && !secondSelected){
+            setSecondSelected(!secondSelected);
             setSecondPlayerToCompare(player_id)
+        }else if(firstSelected && secondSelected){
+            setFirstSelected(!firstSelected);
+        }else{
+            setSecondSelected(!secondSelected);
         }
+
     };
 
     return (
@@ -89,7 +87,7 @@ const RowInfo: React.FC<IRowInfoProps> = ( { data, firstSelected,
                     </Link>
                     
                     <div className="plusCircle" onClick={() => playerSelectedByClick(data.player_id)}>
-                        <FaPlusCircle size={35}/>
+                        <FaPlusCircle size={35} />
                     </div>
                 </div>
             </div>

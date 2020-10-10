@@ -1,22 +1,24 @@
-import React from 'react';
+import React, {} from 'react';
 
 import { Container } from './styles';
 
 interface DataProps{
+    player_id: number,
     photo_url: string,
     first_name: string,
     last_name: string,
     position: string,
     college: string,
-    height: string,
+    height: number,
     weight: number,
     yahoo_name: string,
     injury_status: string,
     experience: string,
-    fourthMetricNumber: number,
-    fourthMetricInfo: string,
-    fivethMetricNumber: number,
-    fivethMetricInfo: string,
+    free_throws_percentage: number,
+    assists: number,
+    steals: number
+    points: number,
+    name: string,
 }
 
 interface IRowInfoProps{
@@ -25,18 +27,22 @@ interface IRowInfoProps{
 
 const CardPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
 
+    console.log('CARAD')
+    console.log(data)
+
+
+
     return (
         <Container>
             <div className="biggerCardInfo">
                 <img src={data.photo_url} alt={data.yahoo_name}/>
                 <div className="descriptionPlayer">
                     <div className="leftSide">
-                        <strong>3</strong>
-                        <span>place</span>
+                        <strong className="playerName">{data.name}</strong>
                     </div>
                     <div className="rightSide">
                         <strong>{data.position}</strong>
-                        <span>{data.college}</span>
+                        <span>Position</span>
                     </div>
                 </div>
 
@@ -44,32 +50,22 @@ const CardPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
                     <div className="infoPlayer">
                         <div className="infoColumns">
                             <div className="upperPart">
-                                <strong>{data.height}</strong>
-                                <span>Height</span>
+                                <strong>{data.points}</strong>
+                                <span>Points</span>
                             </div>
                             <div className="lowerPart">
-                                <strong>{data.weight}</strong>
-                                <span>Weight</span>
+                                <strong>{data.steals}</strong>
+                                <span>Steals</span>
                             </div>
                         </div>
                         <div className="infoColumns">
                             <div className="upperPart">
-                                <strong>{data.injury_status}</strong>
-                                <span>Injury</span>
+                                <strong>{data.assists}</strong>
+                                <span>Assists</span>
                             </div>
                             <div className="lowerPart">
-                                <strong>{data.experience}</strong>
-                                <span>Experience</span>
-                            </div>
-                        </div>
-                        <div className="infoColumns">
-                            <div className="upperPart">
-                                <strong>3</strong>
-                                <span>place</span>
-                            </div>
-                            <div className="lowerPart">
-                                <strong>4</strong>
-                                <span>place</span>
+                                <strong>{data.free_throws_percentage}</strong>
+                                <span>Throws (%)</span>
                             </div>
                         </div>
                     </div>

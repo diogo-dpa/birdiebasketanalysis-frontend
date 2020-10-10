@@ -1,8 +1,8 @@
 import styled from 'styled-components'; 
 
 export const Container = styled.div`
-    width: 100%;
-    height: 130px;
+    width: 260px;
+    height: 80px;
 
     display: flex;
     flex-direction: row;
@@ -34,14 +34,14 @@ export const Container = styled.div`
 
         .buttonSide{
             width: 30%;
-            button{
 
-                padding: 8px 10px;
-                border-radius: 10px;
-                outline: none;
-                border: none;
-                transition: opacity 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
 
+            a, .plusCircle{
+                cursor: pointer;
                 &:hover{
                     opacity: 0.8;
                 }

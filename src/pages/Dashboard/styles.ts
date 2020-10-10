@@ -5,10 +5,6 @@ export const ContainerDashboard = styled.div`
     height: 100%;
     color: #000;
 
-        /* hr .solidDivider{
-            border-top: 3px solid #bbb;
-        } */
-
     .main{
         width: 100%;
         height: 100%;
@@ -20,34 +16,76 @@ export const ContainerDashboard = styled.div`
 
         .firstPart{
             width: 100%;
-            height: 450px;
 
             .filterPart{
                 display: flex;
                 flex-direction: column;
+                padding: 0 20px;
+                padding-bottom: 20px;
+
+                .divFieldsSeach{
+
+                    & + .divFieldsSeach{
+                        margin-top: 45px;
+                    }
+
+                    form{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        grid-template-rows: 1fr 1fr;
+                    }
+                    .labelInputField{
+                        width: 40%;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .mediumPart{
+                        width: 100%;
+                        height: 300px;
+                        overflow: hidden;
+
+                        padding: 30px 0;
+
+                        .resultSearch{
+                            height: 100%;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 1fr;
+                            column-gap: 30px;
+                            overflow-y: scroll;
+
+                        }
+
+                        .barChartPart{
+                            width: 100%;
+                            height: 300px;
+                        }
+                    }
+                }
+
 
             }
         }
 
-        .mediumPart{
-            width: 100%;
-            height: 200px;
-        }
 
         .lastPart{
             width: 100%;
             height: 500px;
             display: flex;
             flex-direction: row;
+            justify-content: space-evenly;
+
+            padding: 30px 0;
+            overflow: hidden;
 
             .teamsSectionDashboard{
-                width: 50%;
+                width: 45%;
                 height: 100%;
+                overflow-y: scroll;
             }
             .playersSectionDashboard{
-                width: 50%;
+                width: 45%;
                 height: 100%;
-
+                overflow-y: scroll;
             }
         }
     }
