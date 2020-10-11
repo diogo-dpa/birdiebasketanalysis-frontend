@@ -12,7 +12,7 @@ import api from '../../services/api';
 
 import { useToasts } from 'react-toast-notifications';
 
-import { PlayerStatsProps, DataProps, TeamDataProps } from '../../interfaces';
+import { PlayerStatsProps, TeamDataProps, PlayerMoreDataProps } from '../../interfaces';
 
 // interface DataProps{
 //     img: string,
@@ -37,7 +37,7 @@ import { PlayerStatsProps, DataProps, TeamDataProps } from '../../interfaces';
 // }
 
 interface locationProps{
-    data: DataProps;
+    data: PlayerMoreDataProps;
 }
 
 const Player: React.FC = ( ) => {
@@ -108,20 +108,20 @@ const Player: React.FC = ( ) => {
                             <h2>Dados do jogador</h2>
                             <div className="info">
                                 <div className="metrics">
-                                    <strong>{playerStatsData.games}</strong>
-                                    <span>Games</span>
+                                    <strong>{data.height}</strong>
+                                    <span>Height</span>
                                 </div>
                                 <div className="metrics">
-                                    <strong>{playerStatsData.minutes}</strong>
-                                    <span>Minutes</span>
+                                    <strong>{data.weight}</strong>
+                                    <span>Weight</span>
                                 </div>
                                 <div className="metrics">
-                                    <strong>{playerStatsData.points}</strong>
-                                    <span>Points</span>
+                                    <strong>{data.birth_state}</strong>
+                                    <span>Country</span>
                                 </div>
                                 <div className="metrics">
-                                    <strong>{playerStatsData.assists}</strong>
-                                    <span>Assists</span>
+                                    <strong>{data.experience}</strong>
+                                    <span>Experience</span>
                                 </div>
                             </div>
                         </div>

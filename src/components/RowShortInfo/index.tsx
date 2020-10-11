@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
+import { TeamDataProps } from '../../interfaces';
 
-interface TeamDataProps{
-    name: string,
-    division: string,
-    wikipedia_logo_url: string,
-    team_id: number,
-};
+
+// interface TeamDataProps{
+//     name: string,
+//     division: string,
+//     wikipedia_logo_url: string,
+//     team_id: number,
+// };
 
 interface IRowInfoProps{
     data: TeamDataProps,
@@ -19,7 +21,12 @@ interface IRowInfoProps{
 const RowShortInfo: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
 
     return (
-        <Container>
+        <Container primaryColor={data.primary_color}
+            secondaryColor={data.secondary_color}
+            tertiaryColor={data.tertiary_color}
+            quaternaryColor={data.quaternary_color}
+        
+        >
             <div>
                 <img src={data.wikipedia_logo_url} alt={data.name}/>
                 <div className="mainInfoCard">

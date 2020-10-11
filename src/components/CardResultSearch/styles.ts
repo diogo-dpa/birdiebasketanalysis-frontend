@@ -14,6 +14,7 @@ export const Container = styled.div`
         width: 85%;
         height: 100%;
         background: #bababa;
+        border-radius: 10px;
 
         display: flex;
         flex-direction: row;

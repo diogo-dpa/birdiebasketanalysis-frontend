@@ -40,6 +40,16 @@ interface IRowInfoProps{
 const BarChart: React.FC<IRowInfoProps> = ( { dataProps, players } : IRowInfoProps ) => {
     console.log(dataProps)
 
+    const theme = {
+        axis: {
+            legend: {
+                textColor: '#eee',
+                fontSize: '14px',
+                tickColor: '#eee',
+            }
+        }
+    };
+
     return (
         <Container>
             <h2>{players.firstPlayer? 

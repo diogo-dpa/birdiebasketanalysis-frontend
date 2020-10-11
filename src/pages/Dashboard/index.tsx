@@ -342,6 +342,7 @@ const Dashboard: React.FC = () => {
     }
     ];
 
+    const [hasSearch, setHasSearch] = useState(false);
 
     function handleTeamSearch(field: string, value: string){
 
@@ -349,6 +350,7 @@ const Dashboard: React.FC = () => {
         let teamFound: TeamDataProps[]  = []
         console.log(value)
         if (value){
+            setHasSearch(true);
             switch (field) {
                 case "name":
                     console.log(allTeams)
@@ -382,10 +384,13 @@ const Dashboard: React.FC = () => {
             }
         }
         else{
+            setHasSearch(false);
             teamFound = []
         }
         setTeamSearched(teamFound)
     }
+
+    
 
     function handlePlayerSearch(field: string, value: string){
 
@@ -393,6 +398,7 @@ const Dashboard: React.FC = () => {
         let playerFound: PlayerMoreDataProps[]  = []
         console.log(value)
         if (value){
+            setHasSearch(true);
             switch (field) {
                 case "first_name":
                     console.log(allTeams)
@@ -438,6 +444,7 @@ const Dashboard: React.FC = () => {
             }
         }
         else{
+            setHasSearch(false);
             playerFound = []
         }
         console.log('passou do filtro')
@@ -447,13 +454,13 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <ContainerDashboard>
+        <ContainerDashboard hasString={hasSearch}>
             <div className="main">
                 <div className="mainTitle">
-                    <img src={basketBall} alt="Basket Ball"/>
-                    <h1>NBA PLAYOFFS</h1>
+                    
+                    <h1>NBA <br/>PLAY<img src={basketBall} alt="Basket Ball"/>FFS</h1>
                 </div>
-                <p>Seja bem vindo ao dashboard!</p>
+                <p>Seja bem vindo ao Dashboard!</p>
 
                 <div className="firstPart">
                     <h2>
@@ -463,44 +470,46 @@ const Dashboard: React.FC = () => {
                     <div className="filterPart">
                         <span>Pesquisar por:</span>
                         <div className="divFieldsSeach">
-                            <strong>Times</strong>
-                            <form >
-                                <div className="labelInputField">
-                                    <label>Nome:</label>
-                                    <input type="text" id="fname" 
-                                        name="fname" placeholder="Nome" 
-                                        onChange={(e) => handleTeamSearch("name", e.target.value)}
-                                    />
-                                </div>
-                                <div className="labelInputField">
-                                    <label>Chave:</label>
-                                    <input type="text" id="lname" 
-                                        name="lname" placeholder="Chave"
-                                        onChange={(e) => handleTeamSearch("key", e.target.value)}
-                                    />
-                                </div>
-                                <div className="labelInputField">
-                                    <label>Cidade:</label>
-                                    <input type="text" id="lname" 
-                                        name="lname" placeholder="Cidade"
-                                        onChange={(e) => handleTeamSearch("city", e.target.value)}
-                                    />
-                                </div>
-                                <div className="labelInputField">
-                                    <label>Conference:</label>
-                                    <input type="text" id="lname" 
-                                        name="lname" placeholder="Conference"
-                                        onChange={(e) => handleTeamSearch("conference", e.target.value)}
-                                    />
-                                </div>
-                                <div className="labelInputField">
-                                    <label>Divisão:</label>
-                                    <input type="text" id="lname" 
-                                        name="lname" placeholder="Divisão"
-                                        onChange={(e) => handleTeamSearch("division", e.target.value)}
-                                    />
-                                </div>
-                            </form>
+                            {/* <div  className="fieldInputs"> */}
+                                <strong>Times</strong>
+                                <form >
+                                    <div className="labelInputField">
+                                        <label>Nome:</label>
+                                        <input type="text" id="fname" 
+                                            name="fname" placeholder="Digite um nome" 
+                                            onChange={(e) => handleTeamSearch("name", e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="labelInputField">
+                                        <label>Chave:</label>
+                                        <input type="text" id="lname" 
+                                            name="lname" placeholder="Digite uma chave"
+                                            onChange={(e) => handleTeamSearch("key", e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="labelInputField">
+                                        <label>Cidade:</label>
+                                        <input type="text" id="lname" 
+                                            name="lname" placeholder="Digite uma cidade"
+                                            onChange={(e) => handleTeamSearch("city", e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="labelInputField">
+                                        <label>Conference:</label>
+                                        <input type="text" id="lname" 
+                                            name="lname" placeholder="Digite uma conferência"
+                                            onChange={(e) => handleTeamSearch("conference", e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="labelInputField">
+                                        <label>Divisão:</label>
+                                        <input type="text" id="lname" 
+                                            name="lname" placeholder="Digite uma divisão"
+                                            onChange={(e) => handleTeamSearch("division", e.target.value)}
+                                        />
+                                    </div>
+                                </form>
+                            {/* </div> */}
 
                             <div className="mediumPart">
                                 <h2>

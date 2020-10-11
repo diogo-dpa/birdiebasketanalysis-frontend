@@ -13,12 +13,14 @@ export const Container = styled.div`
     div{
         width: 85%;
         height: 100%;
-        background: #bababa;
 
+        background:linear-gradient(120deg, #17408B, #FFFFFF, #C9082A);
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
+        border-radius: 10px;
+
 
         img{
             width: 15%;
@@ -30,10 +32,12 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background: transparent;
         }
 
         .buttonSide{
             width: 30%;
+            background: transparent;
             button{
 
                 padding: 8px 10px;
