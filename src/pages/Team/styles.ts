@@ -1,5 +1,12 @@
 import styled from 'styled-components'; 
 
+interface TeamContainerProps{
+    primaryColor: string,
+    secondaryColor: string,
+    tertiaryColor: string,
+    quaternaryColor: string,
+}
+
 export const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -7,9 +14,11 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #${(props: TeamContainerProps) => props.tertiaryColor};
 
     position: relative;
+
+    background: linear-gradient(45deg, #${(props: TeamContainerProps) => props.primaryColor}, #${(props: TeamContainerProps) => props.secondaryColor});
 
     >a {
         position: absolute;

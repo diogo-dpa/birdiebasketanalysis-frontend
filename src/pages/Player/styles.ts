@@ -1,5 +1,12 @@
 import styled from 'styled-components'; 
 
+interface TeamContainerProps{
+    primaryColor: string,
+    secondaryColor: string,
+    tertiaryColor: string,
+    quaternaryColor: string,
+}
+
 export const Container = styled.div`
 
     width: 100%;
@@ -8,9 +15,21 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #${(props: TeamContainerProps) => props.tertiaryColor};
+
+    h1{
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    h2{
+        color: #${(props: TeamContainerProps) => props.quaternaryColor};
+        font-weight: 600;
+    }
 
     position: relative;
+
+    background: linear-gradient(120deg, #${(props: TeamContainerProps) => props.primaryColor}, #${(props: TeamContainerProps) => props.secondaryColor});
 
     >a {
         position: absolute;
@@ -27,6 +46,18 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .titlePlayerPage{
+            /* max-width: 300px; */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            img{
+                width: 60px;
+                margin-right: 15px;
+            }
+        }
 
         .firstSection{
             width: 100%;

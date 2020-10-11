@@ -38,6 +38,10 @@ export interface TeamDataProps{
     conference: string,
     wikipedia_logo_url: string,
     team_id: number,
+    primary_color: string,
+    secondary_color: string,
+    tertiary_color: string,
+    quaternary_color: string,
 };
 
 export interface TeamStatsChartProps{
@@ -58,14 +62,14 @@ export interface TeamStatsChartProps{
 export interface PlayerStatsProps{
     games: number,
     assists: number,
+    points: number,
+    minutes: number,
     three_pointers_percentage: number,
     two_pointers_percentage: number,
     usage_rate_percentage: number,
     total_rebounds_percentage: number,
-    points: number,
     steals_percentage: number,
     player_efficiency_rating: number,
-    minutes: number,
     free_throws_percentage: number,
     field_goals_percentage: number,
     blocks_percentage: number,
@@ -73,6 +77,7 @@ export interface PlayerStatsProps{
     true_shooting_percentage: number,
     blocked_shots: number,
     name: string,
+    team_id: string,
 }
 
 

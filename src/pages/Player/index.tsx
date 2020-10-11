@@ -12,7 +12,7 @@ import api from '../../services/api';
 
 import { useToasts } from 'react-toast-notifications';
 
-import { PlayerStatsProps, DataProps } from '../../interfaces';
+import { PlayerStatsProps, DataProps, TeamDataProps } from '../../interfaces';
 
 // interface DataProps{
 //     img: string,
@@ -44,6 +44,8 @@ const Player: React.FC = ( ) => {
 
     const [playerStatsData, setPlayerStatsData] = useState<PlayerStatsProps>({} as PlayerStatsProps);
 
+    const [teamData, setTeamData] = useState<TeamDataProps>({} as TeamDataProps);
+
     let props = useLocation<locationProps>();
 
     const data = props.state.data;
@@ -62,18 +64,42 @@ const Player: React.FC = ( ) => {
             }
         }
         getPlayerStatsById()
-        
+
     }, [])
 
+    useEffect(() => {
+
+        async function getTeamById(){
+            console.log(playerStatsData)
+            const response = await api.get(`/team/${playerStatsData.team_id}`);
+            if(response.data){
+                setTeamData(response.data[0])
+                console.log(response.data)
+                addToast('Selected Team got it!', { appearance: 'success' })
+            }else{
+                addToast('Selected Team not found.', { appearance: 'error' })
+            }
+        }
+        getTeamById();
+
+    }, [playerStatsData]);
+
     return (
-        <Container>
+        <Container primaryColor={teamData.primary_color}
+                    secondaryColor={teamData.secondary_color}
+                    tertiaryColor={teamData.tertiary_color}
+                    quaternaryColor={teamData.quaternary_color}
+        >
             <Link to="/">
-                <FaArrowLeft size={40} />
+                <FaArrowLeft size={40} color="#fde" />
             </Link>
             {
                 playerStatsData? (
                     <div className="mainContent">
-                        <h1>{playerStatsData.name}</h1>
+                        <div className="titlePlayerPage">
+                            <img src={`${teamData.wikipedia_logo_url}`} alt={teamData.name}/>
+                            <h1>{playerStatsData.name}</h1>
+                        </div>
                         <div className="firstSection">
                             <img src={data.photo_url} alt={playerStatsData.name}/>
                         </div>

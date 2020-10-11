@@ -5,6 +5,8 @@ import { ContainerDashboard } from './styles';
 import RowShortInfo from '../../components/RowShortInfo';
 import RowShortInfoPlayer from '../../components/RowShortInfoPlayers';
 
+import basketBall from '../../assets/basketBallWithoutBG.png';
+
 import BarChart from '../../components/BarChart';
 
 import CardResultSearch from '../../components/CardResultSearch';
@@ -447,7 +449,10 @@ const Dashboard: React.FC = () => {
     return (
         <ContainerDashboard>
             <div className="main">
-                <h1>NBA PLAYOFFS</h1>
+                <div className="mainTitle">
+                    <img src={basketBall} alt="Basket Ball"/>
+                    <h1>NBA PLAYOFFS</h1>
+                </div>
                 <p>Seja bem vindo ao dashboard!</p>
 
                 <div className="firstPart">

@@ -95,9 +95,9 @@ const Team: React.FC = ( ) => {
 
     const [teamStatsData, setTeamStatsData] = useState<TeamStatsDataProps>({} as TeamStatsDataProps);
 
-    const [playersInTeam, setPlayersInTeam] = useState([]);
+    const [playersInTeam, setPlayersInTeam] = useState<PlayerMoreDataProps[]>([] as PlayerMoreDataProps[]);
 
-    const [top3PlayersInTeam, setTop3PlayersInTeam] = useState([]);
+    const [top3PlayersInTeam, setTop3PlayersInTeam] = useState<PlayerMoreDataProps[]>([] as PlayerMoreDataProps[]);
 
     const [firstPlayerToCompare, setFirstPlayerToCompare] = useState(0);
     const [firstPlayerToCompareWithData, setFirstPlayerToCompareWithData] = useState<PlayerStatsProps>(initialPlayerStats);
@@ -199,6 +199,15 @@ const Team: React.FC = ( ) => {
         
     }, [secondPlayerToCompare, setSecondPlayerToCompareWithData])
 
+    // useEffect(() => {
+    //     const playersDataFromTop3 = top3PlayersInTeam.filter( (item: PlayerMoreDataProps) => {
+    //         playersInTeam.filter( (itemInside: PlayerMoreDataProps) => itemInside.player_id == item.player_id)
+    //     });
+    //     console.log('AQUIO')
+    //     console.log(playersDataFromTop3)
+    // }, [top3PlayersInTeam, playersInTeam])
+    
+    
 
     // let dataProps: PlayerStatsProps[] = []
     let dataProps: DataChartProps[] = []
@@ -278,11 +287,22 @@ const Team: React.FC = ( ) => {
         second: secondPlayerToCompareWithData.blocked_shots,
     }
     ];
+
+    const cardColors = { 
+        firstColor: teamData.primary_color, 
+        secondColor: teamData.secondary_color,
+        thirdColor: teamData.tertiary_color, 
+        fourthColor: teamData.quaternary_color
+    };
     
     return (
-        <Container>
+        <Container primaryColor={teamData.primary_color}
+            secondaryColor={teamData.secondary_color}
+            tertiaryColor={teamData.tertiary_color}
+            quaternaryColor={teamData.quaternary_color}
+        >
             <Link to="/">
-                <FaArrowLeft size={40} />
+                <FaArrowLeft size={40} color="#fde" />
             </Link>
             <div className="mainContent">
                 <img src={teamData.wikipedia_logo_url} alt={teamData.name}/>
@@ -294,7 +314,8 @@ const Team: React.FC = ( ) => {
                         {top3PlayersInTeam.map((item, index: number) => {
 
                             return (
-                                <CardPlayer data={item} key={index} />
+                                <CardPlayer data={item} key={index} 
+                                    colors={cardColors}/>
                             );
 
                         })}

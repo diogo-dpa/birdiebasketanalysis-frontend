@@ -1,9 +1,20 @@
 import styled from 'styled-components'; 
 
+// import imageHome from '../../assets/nbaHomeKobe.jpg';
+
 export const ContainerDashboard = styled.div`
     width: 100%;
     height: 100%;
     color: #000;
+
+    /* background-image: url($);
+    background-repeat: no-repeat;
+    background-size: cover; */
+    /* background: linear-gradient(45deg, #2F1C53, #A46DFF, #F6D1FD); */
+    /* background:linear-gradient(120deg, #fc4c02, #FFFFFF); */
+    /* background:linear-gradient(-120deg, #e80029, #40b4e5, #7c868d); */
+    /* background:linear-gradient(120deg, #006fbf, #ff7b00); */
+    background:linear-gradient(120deg, #17408B, #FFFFFF, #C9082A);
 
     .main{
         width: 100%;
@@ -13,6 +24,17 @@ export const ContainerDashboard = styled.div`
         flex-direction:column;
         justify-content: center;
         align-items: center;
+
+        .mainTitle{
+            max-width: 300px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            img{
+                width: 40px;
+            }
+        }
 
         .firstPart{
             width: 100%;

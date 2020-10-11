@@ -23,9 +23,15 @@ interface DataProps{
 
 interface IRowInfoProps{
     data: DataProps,
+    colors: {
+        firstColor: string,
+        secondColor: string,
+        thirdColor: string,
+        fourthColor: string,
+    }
 };
 
-const CardPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
+const CardPlayer: React.FC<IRowInfoProps> = ( { data, colors } : IRowInfoProps ) => {
 
     console.log('CARAD')
     console.log(data)
@@ -33,7 +39,11 @@ const CardPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
 
 
     return (
-        <Container>
+        <Container primaryColor={colors.firstColor}
+                    secondaryColor={colors.secondColor}
+                    tertiaryColor={colors.thirdColor}
+                    quaternaryColor={colors.fourthColor}
+        >
             <div className="biggerCardInfo">
                 <img src={data.photo_url} alt={data.yahoo_name}/>
                 <div className="descriptionPlayer">

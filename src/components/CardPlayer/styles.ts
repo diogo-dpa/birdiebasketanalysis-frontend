@@ -1,5 +1,12 @@
 import styled from 'styled-components'; 
 
+interface CardColorsProps{
+    primaryColor: string,
+    secondaryColor: string,
+    tertiaryColor: string,
+    quaternaryColor: string,
+}
+
 export const Container = styled.div`
 
     width: 250px;
@@ -8,6 +15,10 @@ export const Container = styled.div`
 
     border-radius: 10px;
 
+    color: #${(props: CardColorsProps) => props.secondaryColor};
+
+    /* background: linear-gradient(120deg, #${(props: CardColorsProps) => props.tertiaryColor}, #${(props: CardColorsProps) => props.quaternaryColor}); */
+    background: linear-gradient(45deg, #2F1C53, #A46DFF, #F6D1FD);
     .biggerCardInfo{
         width: 100%;
 
@@ -44,7 +55,7 @@ export const Container = styled.div`
                 }
 
                 .playerName{
-                    color: #001;
+                    color: #fde;
                 }
             }
         }
