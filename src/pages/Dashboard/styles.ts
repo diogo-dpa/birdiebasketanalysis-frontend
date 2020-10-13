@@ -13,14 +13,13 @@ export const ContainerDashboard = styled.div`
     height: 100%;
     color: #000;
 
-    background-image: url(${imageHome});
-    background-color:linear-gradient(120deg, #17408B, #FFFFFF, #C9082A);
+    /* background-image: url(${imageHome}); */
+    /* background-color:linear-gradient(120deg, #17408B, #FFFFFF, #C9082A); */
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    /* background: linear-gradient(45deg, #2F1C53, #A46DFF, #F6D1FD); */
-    /* background:linear-gradient(120deg, #fc4c02, #FFFFFF); */
+    background:linear-gradient(120deg, #fc4c02, #FFFFFF);
     /* background:linear-gradient(-120deg, #e80029, #40b4e5, #7c868d); */
     /* background:linear-gradient(120deg, #006fbf, #ff7b00); */
 
@@ -55,13 +54,29 @@ export const ContainerDashboard = styled.div`
         .firstPart{
             width: 100%;
 
+            h2{
+                font-size: 26px;
+                font-weight: 600;
+            }
+
             .filterPart{
                 display: flex;
                 flex-direction: column;
                 padding: 0 20px;
                 padding-bottom: 20px;
 
+                span{
+                    font-size: 23px;
+                    color: #FFFFFF;
+
+                }
+
                 .divFieldsSeach{
+
+                    strong{
+                        font-size: 21px;
+                        color: #FFFFFF;
+                    }
 
                     & + .divFieldsSeach{
                         margin-top: 45px;
@@ -83,6 +98,7 @@ export const ContainerDashboard = styled.div`
                                 border-radius: 5px;
                                 border: none;
                                 outline: none;
+                                padding-left: 5px;
                             }
                         }
                     /* } */
@@ -94,26 +110,10 @@ export const ContainerDashboard = styled.div`
 
                         padding: 30px 0;
 
-                        /* opacity: 0;
-                        transform: translateY(-100%);
-                        display: none; */
+                        h2{
+                            font-size: 23px;
+                        }
 
-
-                        /* ${(props: DashboardProps) => props.hasString? `
-                            transform: translateY(100%);
-                            opacity: 1;
-                            display: flex;
-                            transition: transform opacity 0.8s;
-                        `
-                        :
-                            `
-                            transform: translateY(-100%);
-                            opacity: 0;
-                            display: none;
-                            transition: 0.5s transform opacity;
-                            `
-
-                        }; */
 
                         .resultSearch{
                             height: 100%;
@@ -130,8 +130,6 @@ export const ContainerDashboard = styled.div`
                         }
                     }
                 }
-
-
             }
         }
 

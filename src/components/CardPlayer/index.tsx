@@ -1,6 +1,10 @@
-import React, {} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import { Container } from './styles';
+
+import {PlayerMoreDataProps} from '../../interfaces';
+
+import api from '../../services/api';
 
 interface DataProps{
     player_id: number,
@@ -23,29 +27,34 @@ interface DataProps{
 
 interface IRowInfoProps{
     data: DataProps,
-    colors: {
-        firstColor: string,
-        secondColor: string,
-        thirdColor: string,
-        fourthColor: string,
-    }
 };
 
-const CardPlayer: React.FC<IRowInfoProps> = ( { data, colors } : IRowInfoProps ) => {
+const CardPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
 
-    console.log('CARAD')
-    console.log(data)
+    const [playerData, setPlayerData] = useState<PlayerMoreDataProps>({} as PlayerMoreDataProps);
+
+    useEffect(() => {
+        async function getPlayerById(){
+            const response = await api.get(`/player/${data.player_id}`);
+            console.log('PRIMEIRO')
+            console.log(response)
+            if(response.data[0]){
+                setPlayerData(response.data[0]);
+            }else{
+                // addToast('Players Data is empty.', { appearance: 'error' })
+            }
+        }
+
+        getPlayerById()
+        
+    }, [])
 
 
 
     return (
-        <Container primaryColor={colors.firstColor}
-                    secondaryColor={colors.secondColor}
-                    tertiaryColor={colors.thirdColor}
-                    quaternaryColor={colors.fourthColor}
-        >
+        <Container >
             <div className="biggerCardInfo">
-                <img src={data.photo_url} alt={data.yahoo_name}/>
+                <img src={playerData.photo_url} alt={data.yahoo_name}/>
                 <div className="descriptionPlayer">
                     <div className="leftSide">
                         <strong className="playerName">{data.name}</strong>

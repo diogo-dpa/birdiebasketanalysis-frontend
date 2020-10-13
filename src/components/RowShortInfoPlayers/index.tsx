@@ -34,7 +34,7 @@ const RowShortInfoPlayer: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps )
                             data: data
                         }
                     }}>
-                        <button>Saiba mais</button>
+                        <button>See more</button>
                     </Link>
                 </div>
             </div>

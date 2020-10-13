@@ -6,16 +6,8 @@ import { Container } from './styles';
 
 import { FaInfoCircle, FaPlusCircle } from 'react-icons/fa';
 
+import { TeamDataProps } from '../../interfaces';
 
-interface TeamDataProps{
-    name: string,
-    division: string,
-    key: string,
-    city: string,
-    conference: string,
-    wikipedia_logo_url: string,
-    team_id: number,
-};
 
 interface IRowInfoProps{
     data: TeamDataProps,
@@ -35,21 +27,27 @@ const CardResultSearch: React.FC<IRowInfoProps> = ( { data, firstSelected, secon
     const teamSelectedByClick = (team_id: number) => {
         
         if(!firstSelected && !secondSelected){
-            setFirstSelected(!firstSelected);
+            setFirstSelected(true);
             setFirstPlayerToCompare(team_id);
         }else if(firstSelected && !secondSelected){
-            setSecondSelected(!secondSelected);
+            setSecondSelected(true);
+            setSecondPlayerToCompare(team_id)
+        }else if(!firstSelected && secondSelected){
+            setSecondSelected(false);
             setSecondPlayerToCompare(team_id)
         }else if(firstSelected && secondSelected){
-            setFirstSelected(!firstSelected);
-        }else{
-            setSecondSelected(!secondSelected);
+            setFirstSelected(false);
+            setFirstPlayerToCompare(team_id);
         }
 
     };
 
     return (
-        <Container>
+        <Container primaryColor={data.primary_color}
+            secondaryColor={data.secondary_color}
+            tertiaryColor={data.tertiary_color}
+            quaternaryColor={data.quaternary_color}
+        >
             <div>
                 <img src={data.wikipedia_logo_url} alt={data.name}/>
                 <div className="mainInfoCard">

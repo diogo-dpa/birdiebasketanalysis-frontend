@@ -10,13 +10,14 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import RowInfo from '../../components/RowInfo';
 import CardPlayer from '../../components/CardPlayer';
+import KobeTributeCard from '../../components/KobeTributeCard';
 
 import api from '../../services/api';
 
 import { useToasts } from 'react-toast-notifications';
 
-import { PlayerStatsProps, DataChartProps, PlayerMoreDataProps, TeamDataProps } from '../../interfaces';
-import { createNoSubstitutionTemplateLiteral } from 'typescript';
+import { PlayerStatsProps, DataChartProps, 
+    PlayerMoreDataProps, TeamDataProps, TeamStatsDataProps } from '../../interfaces';
 
 interface DataProps{
     img: string,
@@ -25,49 +26,8 @@ interface DataProps{
     team_id: number;
 }
 
-// interface PlayerStatsProps{
-//     games: number,
-//     assists: number,
-//     three_pointers_percentage: number,
-//     two_pointers_percentage: number,
-//     usage_rate_percentage: number,
-//     total_rebounds_percentage: number,
-//     points: number,
-//     steals_percentage: number,
-//     player_efficiency_rating: number,
-//     minutes: number,
-//     free_throws_percentage: number,
-//     field_goals_percentage: number,
-//     // fantasy_points_yahoo: number,
-//     blocks_percentage: number,
-//     effective_field_goals_percentage: number,
-//     blocked_shots: number,
-//     name: string,
-// }
-
-interface TeamStatsDataProps{
-    games: number,
-    wins: number,
-    losses: number,
-    assists: number,
-    blocked_shots: number;
-    fantasy_points: number;
-    free_throws_made: number;
-    free_throws_percentage: number;
-}
-
 interface locationProps{
     data: DataProps;
-}
-// interface DataChartProps{
-//     metric: string,
-//     first: number,
-//     second: number,
-// };
-
-interface PlayersSelectedProps{
-    firstPlayer: string,
-    secondPlayer: string,
 }
 
 const Team: React.FC = ( ) => {
@@ -163,15 +123,13 @@ const Team: React.FC = ( ) => {
             }
         }
         getTop3PlayersByPoints()
+
         
-    }, [])
+    }, [addToast])
 
     useEffect(() => {
-        console.log('ENTROU 1º player')
-        console.log(firstPlayerToCompare)
         async function getPlayerStatsById(){
             const response = await api.get(`/playerstats/${firstPlayerToCompare}`);
-            console.log(response.data)
             if(response.data[0]){
                 setFirstPlayerToCompareWithData(response.data[0])
                 addToast('Player added on chart!', { appearance: 'success' })
@@ -184,10 +142,8 @@ const Team: React.FC = ( ) => {
     }, [firstPlayerToCompare, setFirstPlayerToCompareWithData])
 
     useEffect(() => {
-        console.log('ENTROU 2º player')
         async function getPlayerStatsById(){
             const response = await api.get(`/playerstats/${secondPlayerToCompare}`);
-            console.log(response.data)
             if(response.data[0]){
                 setSecondPlayerToCompareWithData(response.data[0]);
                 addToast('Player added on chart!', { appearance: 'success' });
@@ -197,29 +153,16 @@ const Team: React.FC = ( ) => {
         }
         getPlayerStatsById()
         
-    }, [secondPlayerToCompare, setSecondPlayerToCompareWithData])
+    }, [secondPlayerToCompare, setSecondPlayerToCompareWithData, addToast])
 
-    // useEffect(() => {
-    //     const playersDataFromTop3 = top3PlayersInTeam.filter( (item: PlayerMoreDataProps) => {
-    //         playersInTeam.filter( (itemInside: PlayerMoreDataProps) => itemInside.player_id == item.player_id)
-    //     });
-    //     console.log('AQUIO')
-    //     console.log(playersDataFromTop3)
-    // }, [top3PlayersInTeam, playersInTeam])
-    
-    
 
-    // let dataProps: PlayerStatsProps[] = []
-    let dataProps: DataChartProps[] = []
-    dataProps = [{
+    let dataPropsRow01: DataChartProps[] = []
+    let dataPropsRow02: DataChartProps[] = []
+    dataPropsRow01 = [
+    {
         metric: "Games",
         first: firstPlayerToCompareWithData.games,
         second: secondPlayerToCompareWithData.games,
-    },
-    {
-        metric: "Assists",
-        first: firstPlayerToCompareWithData.assists,
-        second: secondPlayerToCompareWithData.assists,
     },
     {
         metric: "3 point.(%)",
@@ -242,11 +185,6 @@ const Team: React.FC = ( ) => {
         second: secondPlayerToCompareWithData.total_rebounds_percentage,
     },
     {
-        metric: "Points",
-        first: firstPlayerToCompareWithData.points,
-        second: secondPlayerToCompareWithData.points,
-    },
-    {
         metric: "Steals(%)",
         first: firstPlayerToCompareWithData.steals_percentage,
         second: secondPlayerToCompareWithData.steals_percentage,
@@ -255,11 +193,6 @@ const Team: React.FC = ( ) => {
         metric: "Player eff.",
         first: firstPlayerToCompareWithData.player_efficiency_rating,
         second: secondPlayerToCompareWithData.player_efficiency_rating,
-    },
-    {
-        metric: "Minutes",
-        first: firstPlayerToCompareWithData.minutes,
-        second: secondPlayerToCompareWithData.minutes,
     },
     {
         metric: "Free thr.(%)",
@@ -277,23 +210,35 @@ const Team: React.FC = ( ) => {
         second: secondPlayerToCompareWithData.blocks_percentage,
     },
     {
-        metric: "Eff. Goals(%)",
-        first: firstPlayerToCompareWithData.effective_field_goals_percentage,
-        second: secondPlayerToCompareWithData.effective_field_goals_percentage,
-    },
-    {
         metric: "Blocked Shots",
         first: firstPlayerToCompareWithData.blocked_shots,
         second: secondPlayerToCompareWithData.blocked_shots,
+    },
+    {
+        metric: "Eff. Goals(%)",
+        first: firstPlayerToCompareWithData.effective_field_goals_percentage,
+        second: secondPlayerToCompareWithData.effective_field_goals_percentage,
     }
     ];
 
-    const cardColors = { 
-        firstColor: teamData.primary_color, 
-        secondColor: teamData.secondary_color,
-        thirdColor: teamData.tertiary_color, 
-        fourthColor: teamData.quaternary_color
-    };
+    dataPropsRow02 = [
+        {
+            metric: "Minutes",
+            first: firstPlayerToCompareWithData.minutes,
+            second: secondPlayerToCompareWithData.minutes,
+        },
+        {
+            metric: "Points",
+            first: firstPlayerToCompareWithData.points,
+            second: secondPlayerToCompareWithData.points,
+        },
+        {
+            metric: "Assists",
+            first: firstPlayerToCompareWithData.assists,
+            second: secondPlayerToCompareWithData.assists,
+        }
+    ];
+
     
     return (
         <Container primaryColor={teamData.primary_color}
@@ -308,14 +253,22 @@ const Team: React.FC = ( ) => {
                 <img src={teamData.wikipedia_logo_url} alt={teamData.name}/>
                 <h1>{teamData.name}</h1>
                 <div className="firstSection">
-                    <h2>Top 3 jogadores por pontos</h2>
+                    {
+                        teamData.name === 'Lakers'?
+                            <div className="kobeSection">
+                                <h2>In honor of Kobe Bryant</h2>
+                                <KobeTributeCard />
+                            </div>
+                        : null
+                    }
+                    <h2>Top 3 players by points</h2>
 
                     <div className="showPlayers">
                         {top3PlayersInTeam.map((item, index: number) => {
 
                             return (
-                                <CardPlayer data={item} key={index} 
-                                    colors={cardColors}/>
+                                <CardPlayer data={item} key={index}
+                                />
                             );
 
                         })}
@@ -325,53 +278,100 @@ const Team: React.FC = ( ) => {
                 <div className="infoTeam">
                     <div className="upperInfo">
                         <div className="metrics">
-                            <strong>{teamStatsData.games}</strong>
+                            <strong>{teamStatsData.games || 'Empty'}</strong>
                             <span>Games</span>
                         </div>
                         <div className="metrics">
-                            <strong>{teamStatsData.wins}</strong>
+                            <strong>{teamStatsData.wins || 'Empty'}</strong>
                             <span>Wins</span>
                         </div>
                         <div className="metrics">
-                            <strong>{teamStatsData.losses}</strong>
+                            <strong>{teamStatsData.losses || 'Empty'}</strong>
                             <span>Losses</span>
                         </div>
                         <div className="metrics">
-                            <strong>{teamStatsData.assists}</strong>
+                            <strong>{teamStatsData.assists || 'Empty'}</strong>
                             <span>Assists</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.steals || 'Empty'}</strong>
+                            <span>Steals</span>
+                        </div>
+                    </div>
+                    <div className="upperInfo">
+                        <div className="metrics">
+                                <strong>{teamStatsData.field_goals_percentage || 'Empty'}</strong>
+                                <span>Field Goals (%)</span>
+                        </div>
+                        <div className="metrics">
+                                <strong>{teamStatsData.effective_field_goals_percentage || 'Empty'}</strong>
+                                <span>Eff. Field Goals (%)</span>
+                        </div>
+                        <div className="metrics">
+                                <strong>{teamStatsData.two_pointers_percentage || 'Empty'}</strong>
+                                <span>2 Pointers (%)</span>
+                        </div>
+                        <div className="metrics">
+                                <strong>{teamStatsData.three_pointers_percentage || 'Empty'}</strong>
+                                <span>3 Pointers (%)</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.free_throws_percentage || 'Empty'}</strong>
+                            <span>Free Throws (%)</span>
                         </div>
                     </div>
                     <div className="lowerInfo">
                         <div className="metrics">
-                            <strong>{teamStatsData.blocked_shots}</strong>
+                            <strong>{teamStatsData.offensive_rebounds_percentage || 'Empty'}</strong>
+                            <span>Offens. Rebounds (%)</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.defensive_rebounds_percentage || 'Empty'}</strong>
+                            <span>Defens. Rebounds (%)</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.total_rebounds_percentage || 'Empty'}</strong>
+                            <span>Total Rebounds (%)</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.turnovers || 'Empty'}</strong>
+                            <span>Turn Overs</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.personal_fouls || 'Empty'}</strong>
+                            <span>Personal Fouls</span>
+                        </div>
+                        <div className="metrics">
+                            <strong>{teamStatsData.blocked_shots || 'Empty'}</strong>
                             <span>Blocked Shots</span>
                         </div>
                         <div className="metrics">
-                            <strong>{teamStatsData.fantasy_points}</strong>
+                            <strong>{teamStatsData.fantasy_points || 'Empty'}</strong>
                             <span>Fantasy Points</span>
                         </div>
                         <div className="metrics">
-                            <strong>{teamStatsData.free_throws_made}</strong>
-                            <span>Free Throws Made</span>
-                        </div>
-                        <div className="metrics">
-                            <strong>{teamStatsData.free_throws_percentage}</strong>
-                            <span>Free Throws (%)</span>
+                            <strong>{teamStatsData.true_shooting_percentage || 'Empty'}</strong>
+                            <span>True Shooting (%)</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="analysisSection">
-                    <h2 className="analysisTitle" >Vamos comparar!</h2>
+                    <h2 className="analysisTitle" >Let's compare its players!</h2>
                     <div className="chartSection">
-                        <BarChart dataProps={dataProps} 
+                        <BarChart dataProps={dataPropsRow01} 
+                            players={{firstPlayer: firstPlayerToCompareWithData.name,
+                                secondPlayer: secondPlayerToCompareWithData.name }}/>
+                    </div>
+                    <div className="chartSection">
+                        <BarChart dataProps={dataPropsRow02} 
                             players={{firstPlayer: firstPlayerToCompareWithData.name,
                                 secondPlayer: secondPlayerToCompareWithData.name }}/>
                     </div>
                 </div>
 
                 <div className="secondSection">
-                <h2>Meu time</h2>
+                <h2>My team</h2>
                     {playersInTeam.map((item, index: number) => {
 
                         return (

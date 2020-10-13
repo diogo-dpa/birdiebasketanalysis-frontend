@@ -4,25 +4,6 @@ import { ResponsiveBar } from '@nivo/bar';
 
 import { Container } from './styles';
 
-// interface DataProps{
-//     games: number,
-//     assists: number,
-//     three_pointers_percentage: number,
-//     two_pointers_percentage: number,
-//     usage_rate_percentage: number,
-//     total_rebounds_percentage: number,
-//     points: number,
-//     steals_percentage: number,
-//     player_efficiency_rating: number,
-//     minutes: number,
-//     free_throws_percentage: number,
-//     field_goals_percentage: number,
-//     fantasy_points_yahoo: number,
-//     blocks_percentage: number,
-//     effective_field_goals_percentage: number,
-//     blocked_shots: number,
-// }
-
 interface DataChartProps{
     metric: string,
     first: number,
@@ -38,15 +19,24 @@ interface IRowInfoProps{
 };
 
 const BarChart: React.FC<IRowInfoProps> = ( { dataProps, players } : IRowInfoProps ) => {
-    console.log(dataProps)
 
     const theme = {
         axis: {
-            legend: {
-                textColor: '#eee',
-                fontSize: '14px',
-                tickColor: '#eee',
+          fontSize: "14px",
+          tickColor: "#000",
+          ticks: {
+            line: {
+              stroke: "#555555"
+            },
+            text: {
+              fill: "#000",
             }
+          },
+          legend: {
+            text: {
+              fill: "#aaaaaa"
+            }
+          }
         }
     };
 
@@ -54,9 +44,9 @@ const BarChart: React.FC<IRowInfoProps> = ( { dataProps, players } : IRowInfoPro
         <Container>
             <h2>{players.firstPlayer? 
                 `${players.firstPlayer}`
-                : 'Ops...Vazio'} x {players.secondPlayer? 
+                : 'Ops...Empty'} x {players.secondPlayer? 
                     `${players.secondPlayer}`
-                : 'Ops...Vazio'
+                : 'Ops...Empty'
             }</h2>
             <ResponsiveBar 
                 data={dataProps} 
@@ -70,11 +60,12 @@ const BarChart: React.FC<IRowInfoProps> = ( { dataProps, players } : IRowInfoPro
                 tickSize: 5,
                 tickPadding: 20,
                 tickRotation: 0,
-                legend: "Estatísticas",
+                legend: "",
                 legendOffset: 55,
                 legendPosition: "middle",
                 }}
-                colors={{ scheme: "nivo" }}
+                colors={{ scheme: "dark2" }}
+                theme={theme}
                 legends={[
                     {
                         dataFrom: 'keys',
@@ -87,13 +78,14 @@ const BarChart: React.FC<IRowInfoProps> = ( { dataProps, players } : IRowInfoPro
                         itemWidth: 100,
                         itemHeight: 20,
                         itemDirection: 'left-to-right',
+                        itemTextColor: "#000",
                         itemOpacity: 0.85,
                         symbolSize: 20,
                         effects: [
                             {
                                 on: 'hover',
                                 style: {
-                                    itemOpacity: 1
+                                    itemOpacity: 1,
                                 }
                             }
                         ]

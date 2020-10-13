@@ -1,4 +1,3 @@
-import React from 'react';
 
 export interface DataProps{
     img: string,
@@ -45,39 +44,70 @@ export interface TeamDataProps{
 };
 
 export interface TeamStatsChartProps{
+    name: string,
     assists: number,
     blocked_shots: number,
     effective_field_goals_percentage: number,
     field_goals_percentage: number,
     free_throws_percentage: number,
+    points: number,
     losses: number,
     games: number,
     three_pointers_percentage: number,
     true_shooting_percentage: number,
     two_pointers_percentage: number,
-    points: number,
+}
+
+export interface TeamStatsDataProps{
     name: string,
+    wins: number,
+    losses: number,
+    games: number,
+    minutes: number,
+    points: number,
+    field_goals_percentage: number,
+    effective_field_goals_percentage: number,
+    two_pointers_percentage: number,
+    three_pointers_percentage: number,
+    free_throws_percentage: number;
+    offensive_rebounds_percentage: number,
+    defensive_rebounds_percentage: number,
+    total_rebounds_percentage: number,
+    assists: number,
+    steals: number,
+    turnovers: number,
+    personal_fouls: number,
+    blocked_shots: number;
+    fantasy_points: number;
+    true_shooting_percentage: number,
 }
 
 export interface PlayerStatsProps{
-    games: number,
-    assists: number,
-    points: number,
-    minutes: number,
-    three_pointers_percentage: number,
-    two_pointers_percentage: number,
-    usage_rate_percentage: number,
-    total_rebounds_percentage: number,
-    steals_percentage: number,
-    player_efficiency_rating: number,
-    free_throws_percentage: number,
-    field_goals_percentage: number,
-    blocks_percentage: number,
-    effective_field_goals_percentage: number,
-    true_shooting_percentage: number,
-    blocked_shots: number,
-    name: string,
     team_id: string,
+    player_id: string,
+    name: string,
+    position: string,
+    games: number,
+    minutes: number,
+    field_goals_percentage: number,
+    effective_field_goals_percentage: number,
+    two_pointers_percentage: number,
+    three_pointers_percentage: number,
+    free_throws_percentage: number,
+    offensive_rebounds_percentage: number,
+    defensive_rebounds_percentage: number,
+    total_rebounds_percentage: number,
+    assists: number,
+    steals: number,
+    blocked_shots: number,
+    personal_fouls: number,
+    points: number,
+    true_shooting_percentage: number,
+    player_efficiency_rating: number,
+    usage_rate_percentage: number,
+    steals_percentage: number,
+    blocks_percentage: number,
+    turn_overs_percentage: number,
 }
 
 

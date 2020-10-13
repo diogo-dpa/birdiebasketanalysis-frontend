@@ -7,13 +7,6 @@ import { Container } from './styles';
 import { TeamDataProps } from '../../interfaces';
 
 
-// interface TeamDataProps{
-//     name: string,
-//     division: string,
-//     wikipedia_logo_url: string,
-//     team_id: number,
-// };
-
 interface IRowInfoProps{
     data: TeamDataProps,
 };
@@ -41,7 +34,7 @@ const RowShortInfo: React.FC<IRowInfoProps> = ( { data } : IRowInfoProps ) => {
                             data: data
                         }
                     }}>
-                        <button>Saiba mais</button>
+                        <button>See more</button>
                     </Link>
                 </div>
             </div>

@@ -14,28 +14,6 @@ import { useToasts } from 'react-toast-notifications';
 
 import { PlayerStatsProps, TeamDataProps, PlayerMoreDataProps } from '../../interfaces';
 
-// interface DataProps{
-//     img: string,
-//     name: string,
-//     info: string,
-//     player_id: string,
-//     photo_url: string,
-// }
-
-// interface PlayerStatsDataProps{
-//     name: string,
-//     games: number,
-//     minutes: number,
-//     points: number,
-//     assists: number,
-//     field_goals_percentage: number,
-//     two_pointers_percentage: number,
-//     three_pointers_percentage: number,
-//     free_throws_percentage: number,
-//     true_shooting_percentage: number,
-//     blocks_percentage: number,
-// }
-
 interface locationProps{
     data: PlayerMoreDataProps;
 }
@@ -82,7 +60,7 @@ const Player: React.FC = ( ) => {
         }
         getTeamById();
 
-    }, [playerStatsData]);
+    }, [playerStatsData, addToast]);
 
     return (
         <Container primaryColor={teamData.primary_color}
@@ -105,7 +83,7 @@ const Player: React.FC = ( ) => {
                         </div>
 
                         <div className="playerData">
-                            <h2>Dados do jogador</h2>
+                            <h2>Player Data</h2>
                             <div className="info">
                                 <div className="metrics">
                                     <strong>{data.height}</strong>
@@ -114,6 +92,10 @@ const Player: React.FC = ( ) => {
                                 <div className="metrics">
                                     <strong>{data.weight}</strong>
                                     <span>Weight</span>
+                                </div>
+                                <div className="metrics">
+                                    <strong>{data.position}</strong>
+                                    <span>Position</span>
                                 </div>
                                 <div className="metrics">
                                     <strong>{data.birth_state}</strong>
@@ -127,7 +109,7 @@ const Player: React.FC = ( ) => {
                         </div>
 
                         <div className="playerStats">
-                            <h2>Estatísticas do jogador</h2>
+                            <h2>Player Statistics</h2>
                             <div className="infoPlayer">
                                 <div className="upperInfo">
                                     <div className="metrics">
@@ -142,9 +124,27 @@ const Player: React.FC = ( ) => {
                                         <strong>{playerStatsData.points}</strong>
                                         <span>Points</span>
                                     </div>
+                                </div>
+                                <div className="upperInfo">
                                     <div className="metrics">
                                         <strong>{playerStatsData.assists}</strong>
                                         <span>Assists</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.steals}</strong>
+                                        <span>Steals</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.blocked_shots}</strong>
+                                        <span>Blocked Shots</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.personal_fouls}</strong>
+                                        <span>Personal Fouls</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.player_efficiency_rating}</strong>
+                                        <span>Eff. Rating</span>
                                     </div>
                                 </div>
                                 <div className="lowerInfo">
@@ -172,6 +172,33 @@ const Player: React.FC = ( ) => {
                                         <strong>{playerStatsData.blocks_percentage}</strong>
                                         <span>Blocks (%)</span>
                                     </div>
+                                </div>
+                                <div className="lowerInfo">
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.offensive_rebounds_percentage}</strong>
+                                        <span>Offens. Rebounds (%)</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.defensive_rebounds_percentage}</strong>
+                                        <span>Defens. Rebounds (%)</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.total_rebounds_percentage}</strong>
+                                        <span>Total. Rebounds (%)</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.usage_rate_percentage}</strong>
+                                        <span>Usage Rate (%)</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.steals_percentage}</strong>
+                                        <span>Steals (%)</span>
+                                    </div>
+                                    <div className="metrics">
+                                        <strong>{playerStatsData.turn_overs_percentage}</strong>
+                                        <span>Turn Over (%)</span>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

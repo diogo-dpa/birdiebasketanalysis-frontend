@@ -9,16 +9,18 @@ export const Container = styled.div`
     justify-content: center;
 
     margin-top: 15px;
+    
 
     div{
         width: 85%;
         height: 100%;
-        background: #bababa;
 
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
+        background:linear-gradient(120deg, #17408B, #FFFFFF, #C9082A);
+        border-radius: 10px;
 
         img{
             width: 15%;
@@ -30,6 +32,19 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background: transparent;
+
+            strong{
+                max-width: 110px;
+                overflow: hidden;
+                font-size: 20px !important;
+                color: #000 !important;
+                
+                margin-left: 15px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
         }
 
         .buttonSide{
@@ -39,9 +54,11 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
+            background: transparent;
 
             a, .plusCircle{
                 cursor: pointer;
+                background: transparent;
                 &:hover{
                     opacity: 0.8;
                 }

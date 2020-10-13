@@ -76,6 +76,10 @@ export const Container = styled.div`
         .playerData{
             width: 100%;
 
+            h2{
+                margin-left: 20px;
+            }
+
             .info{
                 width: 100%;
                 display: flex;
@@ -86,6 +90,7 @@ export const Container = styled.div`
                 padding: 15px 0;
 
                 .metrics{
+                    height: auto;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -98,11 +103,20 @@ export const Container = styled.div`
                         font-size: 30px;
                         font-weight: 600;
                     }
+
+                    span{
+                        margin-top: -10px;
+                        font-size: 14px;
+                    }
                 }
             }
         }
         .playerStats{
             width: 100%;
+
+            h2{
+                margin-left: 20px;
+            }
 
             .infoPlayer{
                 width: 100%;
@@ -127,6 +141,7 @@ export const Container = styled.div`
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    padding-bottom: 10px;
 
                     & + .metrics{
                         margin-left: 45px;
@@ -135,6 +150,11 @@ export const Container = styled.div`
                     strong{
                         font-size: 30px;
                         font-weight: 600;
+                    }
+
+                    span{
+                        margin-top: -10px;
+                        font-size: 14px;
                     }
                 }
             }

@@ -1,5 +1,12 @@
 import styled from 'styled-components'; 
 
+interface TeamContainerProps{
+    primaryColor: string,
+    secondaryColor: string,
+    tertiaryColor: string,
+    quaternaryColor: string,
+}
+
 export const Container = styled.div`
     width: 260px;
     height: 80px;
@@ -21,6 +28,8 @@ export const Container = styled.div`
         align-items: center;
         justify-content: space-evenly;
 
+        background: linear-gradient(120deg, #${(props: TeamContainerProps) => props.primaryColor}, #${(props: TeamContainerProps) => props.secondaryColor});
+
         img{
             width: 15%;
         }
@@ -31,6 +40,15 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            background: transparent;
+
+            strong{
+                font-weight: 600;
+                font-size: 17px;
+                color: #${(props: TeamContainerProps) => props.tertiaryColor};
+                margin-left: 15px;
+            }
         }
 
         .buttonSide{
@@ -40,9 +58,11 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
+            background: transparent;
 
             a, .plusCircle{
                 cursor: pointer;
+                background: transparent;
                 &:hover{
                     opacity: 0.8;
                 }

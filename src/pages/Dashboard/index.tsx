@@ -16,7 +16,7 @@ import api from '../../services/api';
 
 import { useToasts } from 'react-toast-notifications';
 
-import { PlayerMoreDataProps, TeamDataProps, TeamStatsChartProps,
+import { PlayerMoreDataProps, TeamDataProps, TeamStatsDataProps,
     PlayerStatsProps, DataChartProps
 } from '../../interfaces';
 
@@ -28,69 +28,6 @@ interface PlayerDataProps{
     photo_url: string,
 }
 
-// interface PlayerMoreDataProps{
-//     yahoo_name: string,
-//     position: string,
-//     team: string,
-//     player_id: number,
-//     height: number,
-//     weight: number,
-//     birth_state: string,
-//     first_name: string,
-//     last_name: string,
-//     photo_url: string,
-// }
-
-// interface TeamDataProps{
-//     name: string,
-//     division: string,
-//     key: string,
-//     city: string,
-//     conference: string,
-//     wikipedia_logo_url: string,
-//     team_id: number,
-// };
-
-// interface TeamStatsChartProps{
-//     assists: number,
-//     blocked_shots: number,
-//     effective_field_goals_percentage: number,
-//     field_goals_percentage: number,
-//     free_throws_percentage: number,
-//     losses: number,
-//     games: number,
-//     three_pointers_percentage: number,
-//     true_shooting_percentage: number,
-//     two_pointers_percentage: number,
-//     points: number,
-//     name: string,
-// }
-
-// interface PlayerStatsProps{
-//     games: number,
-//     assists: number,
-//     three_pointers_percentage: number,
-//     two_pointers_percentage: number,
-//     usage_rate_percentage: number,
-//     total_rebounds_percentage: number,
-//     points: number,
-//     steals_percentage: number,
-//     player_efficiency_rating: number,
-//     minutes: number,
-//     free_throws_percentage: number,
-//     field_goals_percentage: number,
-//     // fantasy_points_yahoo: number,
-//     blocks_percentage: number,
-//     effective_field_goals_percentage: number,
-//     blocked_shots: number,
-//     name: string,
-// }
-
-// interface DataChartProps{
-//     metric: string,
-//     first: number,
-//     second: number,
-// };
 
 const Dashboard: React.FC = () => {
 
@@ -115,8 +52,8 @@ const Dashboard: React.FC = () => {
     const [firstTeamSearched, setFirstTeamSearched] = useState(false);
     const [secondTeamSearched, setSecondTeamSearched] = useState(false);
 
-    const [firstTeamSearchedWithStats, setFirstTeamSearchedWithStats] = useState<TeamStatsChartProps>({} as TeamStatsChartProps);
-    const [secondTeamSearchedWithStats, setSecondTeamSearchedWithStats] = useState<TeamStatsChartProps>({} as TeamStatsChartProps);
+    const [firstTeamSearchedWithStats, setFirstTeamSearchedWithStats] = useState<TeamStatsDataProps>({} as TeamStatsDataProps);
+    const [secondTeamSearchedWithStats, setSecondTeamSearchedWithStats] = useState<TeamStatsDataProps>({} as TeamStatsDataProps);
 
     // GET ID
     const [firstTeamToCompare, setFirstTeamToCompare] = useState(0);
@@ -149,7 +86,7 @@ const Dashboard: React.FC = () => {
         getSomePlayers();
 
         
-    }, [])
+    }, [addToast])
 
     //  GET TEAM STATS
     useEffect(() => {
@@ -163,7 +100,7 @@ const Dashboard: React.FC = () => {
         }
         getTeamStatsById()
         
-    }, [firstTeamToCompare, setFirstTeamSearchedWithStats])
+    }, [firstTeamToCompare, setFirstTeamSearchedWithStats, addToast])
 
     useEffect(() => {
         console.log('ENTROU 2º player')
@@ -177,7 +114,7 @@ const Dashboard: React.FC = () => {
         }
         getTeamStatsById()
         
-    }, [secondTeamToCompare, setSecondTeamSearchedWithStats])
+    }, [secondTeamToCompare, setSecondTeamSearchedWithStats, addToast])
 
     //  GET PLAYER STATS
     useEffect(() => {
@@ -211,21 +148,12 @@ const Dashboard: React.FC = () => {
     }, [secondPlayerToCompare, setSecondPlayerSearchedWithStats])
 
 
-    let dataProps: DataChartProps[] = []
-    dataProps = [{
+    let teamDataPropsRow01: DataChartProps[] = []
+    let teamDataPropsRow02: DataChartProps[] = []
+    teamDataPropsRow01 = [{
         metric: "Games",
         first: firstTeamSearchedWithStats.games,
         second: secondTeamSearchedWithStats.games,
-    },
-    {
-        metric: "Assists",
-        first: firstTeamSearchedWithStats.assists,
-        second: secondTeamSearchedWithStats.assists,
-    },
-    {
-        metric: "3 point.(%)",
-        first: firstTeamSearchedWithStats.three_pointers_percentage,
-        second: secondTeamSearchedWithStats.three_pointers_percentage,
     },
     {
         metric: "2 point.(%)",
@@ -233,14 +161,14 @@ const Dashboard: React.FC = () => {
         second: secondTeamSearchedWithStats.two_pointers_percentage,
     },
     {
+        metric: "3 point.(%)",
+        first: firstTeamSearchedWithStats.three_pointers_percentage,
+        second: secondTeamSearchedWithStats.three_pointers_percentage,
+    },
+    {
         metric: "Losses",
         first: firstTeamSearchedWithStats.losses,
         second: secondTeamSearchedWithStats.losses,
-    },
-    {
-        metric: "Points",
-        first: firstTeamSearchedWithStats.points,
-        second: secondTeamSearchedWithStats.points,
     },
     {
         metric: "Free thr.(%)",
@@ -258,42 +186,73 @@ const Dashboard: React.FC = () => {
         second: secondTeamSearchedWithStats.effective_field_goals_percentage,
     },
     {
-        metric: "Blocked Shots",
-        first: firstTeamSearchedWithStats.blocked_shots,
-        second: secondTeamSearchedWithStats.blocked_shots,
-    }
+        metric: "Eff. Goals(%)",
+        first: firstTeamSearchedWithStats.effective_field_goals_percentage,
+        second: secondTeamSearchedWithStats.effective_field_goals_percentage,
+    },
+    {
+        metric: "Offens. Reb.(%)",
+        first: firstTeamSearchedWithStats.offensive_rebounds_percentage,
+        second: secondTeamSearchedWithStats.offensive_rebounds_percentage,
+    },
+    {
+        metric: "Defens. Reb.(%)",
+        first: firstTeamSearchedWithStats.defensive_rebounds_percentage,
+        second: secondTeamSearchedWithStats.defensive_rebounds_percentage,
+    },
+    {
+        metric: "Total. Reb.(%)",
+        first: firstTeamSearchedWithStats.total_rebounds_percentage,
+        second: secondTeamSearchedWithStats.total_rebounds_percentage,
+    },
+    {
+        metric: "True Shoot.(%)",
+        first: firstTeamSearchedWithStats.true_shooting_percentage,
+        second: secondTeamSearchedWithStats.true_shooting_percentage,
+    },
+
     ];
 
-    let dataPlayerProps: DataChartProps[] = []
-    dataPlayerProps = [{
-        metric: "Games",
-        first: firstPlayerSearchedWithStats.games,
-        second: secondPlayerSearchedWithStats.games,
-    },
+    teamDataPropsRow02 = [
+        {
+            metric: "Points",
+            first: firstTeamSearchedWithStats.points,
+            second: secondTeamSearchedWithStats.points,
+        },
+        {
+            metric: "Assists",
+            first: firstTeamSearchedWithStats.assists,
+            second: secondTeamSearchedWithStats.assists,
+        },
+        {
+            metric: "Blocked Shots",
+            first: firstTeamSearchedWithStats.blocked_shots,
+            second: secondTeamSearchedWithStats.blocked_shots,
+        },
+        {
+            metric: "Steals",
+            first: firstTeamSearchedWithStats.steals,
+            second: secondTeamSearchedWithStats.steals,
+        },
+        {
+            metric: "Turnovers",
+            first: firstTeamSearchedWithStats.turnovers,
+            second: secondTeamSearchedWithStats.turnovers,
+        },
+        {
+            metric: "Pers. Fouls",
+            first: firstTeamSearchedWithStats.personal_fouls,
+            second: secondTeamSearchedWithStats.personal_fouls,
+        },
+    ]
+
+    let dataPlayerPropsRow01: DataChartProps[] = []
+    let dataPlayerPropsRow02: DataChartProps[] = []
+    dataPlayerPropsRow01 = [
     {
         metric: "Assists",
         first: firstPlayerSearchedWithStats.assists,
         second: secondPlayerSearchedWithStats.assists,
-    },
-    {
-        metric: "3 point.(%)",
-        first: firstPlayerSearchedWithStats.three_pointers_percentage,
-        second: secondPlayerSearchedWithStats.three_pointers_percentage,
-    },
-    {
-        metric: "2 point.(%)",
-        first: firstPlayerSearchedWithStats.two_pointers_percentage,
-        second: secondPlayerSearchedWithStats.two_pointers_percentage,
-    },
-    {
-        metric: "Usage(%)",
-        first: firstPlayerSearchedWithStats.usage_rate_percentage,
-        second: secondPlayerSearchedWithStats.usage_rate_percentage,
-    },
-    {
-        metric: "Rebounds(%)",
-        first: firstPlayerSearchedWithStats.total_rebounds_percentage,
-        second: secondPlayerSearchedWithStats.total_rebounds_percentage,
     },
     {
         metric: "Points",
@@ -301,48 +260,75 @@ const Dashboard: React.FC = () => {
         second: secondPlayerSearchedWithStats.points,
     },
     {
-        metric: "Steals(%)",
-        first: firstPlayerSearchedWithStats.steals_percentage,
-        second: secondPlayerSearchedWithStats.steals_percentage,
-    },
-    {
-        metric: "Player eff.",
-        first: firstPlayerSearchedWithStats.player_efficiency_rating,
-        second: secondPlayerSearchedWithStats.player_efficiency_rating,
-    },
-    {
         metric: "Minutes",
         first: firstPlayerSearchedWithStats.minutes,
         second: secondPlayerSearchedWithStats.minutes,
     },
-    {
-        metric: "Free thr.(%)",
-        first: firstPlayerSearchedWithStats.free_throws_percentage,
-        second: secondPlayerSearchedWithStats.free_throws_percentage,
-    },
-    {
-        metric: "Field goals(%)",
-        first: firstPlayerSearchedWithStats.field_goals_percentage,
-        second: secondPlayerSearchedWithStats.field_goals_percentage,
-    },
-    {
-        metric: "Blocks(%)",
-        first: firstPlayerSearchedWithStats.blocks_percentage,
-        second: secondPlayerSearchedWithStats.blocks_percentage,
-    },
-    {
-        metric: "Eff. Goals(%)",
-        first: firstPlayerSearchedWithStats.effective_field_goals_percentage,
-        second: secondPlayerSearchedWithStats.effective_field_goals_percentage,
-    },
-    {
-        metric: "Blocked Shots",
-        first: firstPlayerSearchedWithStats.blocked_shots,
-        second: secondPlayerSearchedWithStats.blocked_shots,
-    }
     ];
 
-    const [hasSearch, setHasSearch] = useState(false);
+    dataPlayerPropsRow02 = [
+        {
+            metric: "Games",
+            first: firstPlayerSearchedWithStats.games,
+            second: secondPlayerSearchedWithStats.games,
+        },
+        {
+            metric: "Player eff.",
+            first: firstPlayerSearchedWithStats.player_efficiency_rating,
+            second: secondPlayerSearchedWithStats.player_efficiency_rating,
+        },
+        {
+            metric: "3 point.(%)",
+            first: firstPlayerSearchedWithStats.three_pointers_percentage,
+            second: secondPlayerSearchedWithStats.three_pointers_percentage,
+        },
+        {
+            metric: "2 point.(%)",
+            first: firstPlayerSearchedWithStats.two_pointers_percentage,
+            second: secondPlayerSearchedWithStats.two_pointers_percentage,
+        },
+        {
+            metric: "Usage(%)",
+            first: firstPlayerSearchedWithStats.usage_rate_percentage,
+            second: secondPlayerSearchedWithStats.usage_rate_percentage,
+        },
+        {
+            metric: "Rebounds(%)",
+            first: firstPlayerSearchedWithStats.total_rebounds_percentage,
+            second: secondPlayerSearchedWithStats.total_rebounds_percentage,
+        },
+        {
+            metric: "Steals(%)",
+            first: firstPlayerSearchedWithStats.steals_percentage,
+            second: secondPlayerSearchedWithStats.steals_percentage,
+        },
+        {
+            metric: "Free thr.(%)",
+            first: firstPlayerSearchedWithStats.free_throws_percentage,
+            second: secondPlayerSearchedWithStats.free_throws_percentage,
+        },
+        {
+            metric: "Field goals(%)",
+            first: firstPlayerSearchedWithStats.field_goals_percentage,
+            second: secondPlayerSearchedWithStats.field_goals_percentage,
+        },
+        {
+            metric: "Blocks(%)",
+            first: firstPlayerSearchedWithStats.blocks_percentage,
+            second: secondPlayerSearchedWithStats.blocks_percentage,
+        },
+        {
+            metric: "Eff. Goals(%)",
+            first: firstPlayerSearchedWithStats.effective_field_goals_percentage,
+            second: secondPlayerSearchedWithStats.effective_field_goals_percentage,
+        },
+        {
+            metric: "Blocked Shots",
+            first: firstPlayerSearchedWithStats.blocked_shots,
+            second: secondPlayerSearchedWithStats.blocked_shots,
+        }
+    ];
+
 
     function handleTeamSearch(field: string, value: string){
 
@@ -350,7 +336,6 @@ const Dashboard: React.FC = () => {
         let teamFound: TeamDataProps[]  = []
         console.log(value)
         if (value){
-            setHasSearch(true);
             switch (field) {
                 case "name":
                     console.log(allTeams)
@@ -384,7 +369,6 @@ const Dashboard: React.FC = () => {
             }
         }
         else{
-            setHasSearch(false);
             teamFound = []
         }
         setTeamSearched(teamFound)
@@ -398,7 +382,6 @@ const Dashboard: React.FC = () => {
         let playerFound: PlayerMoreDataProps[]  = []
         console.log(value)
         if (value){
-            setHasSearch(true);
             switch (field) {
                 case "first_name":
                     console.log(allTeams)
@@ -444,7 +427,6 @@ const Dashboard: React.FC = () => {
             }
         }
         else{
-            setHasSearch(false);
             playerFound = []
         }
         console.log('passou do filtro')
@@ -454,57 +436,57 @@ const Dashboard: React.FC = () => {
     }
 
     return (
-        <ContainerDashboard hasString={hasSearch}>
+        <ContainerDashboard >
             <div className="main">
                 <div className="mainTitle">
                     
                     <h1>NBA <br/>PLAY<img src={basketBall} alt="Basket Ball"/>FFS</h1>
                 </div>
-                <p>Seja bem vindo ao Dashboard!</p>
+                <p>Welcome to Dashboard!</p>
 
                 <div className="firstPart">
                     <h2>
-                        Área de pesquisa
+                        Search area
                     </h2>
 
                     <div className="filterPart">
-                        <span>Pesquisar por:</span>
+                        <span>Search by:</span>
                         <div className="divFieldsSeach">
                             {/* <div  className="fieldInputs"> */}
-                                <strong>Times</strong>
+                                <strong>Teams</strong>
                                 <form >
                                     <div className="labelInputField">
-                                        <label>Nome:</label>
+                                        <label>Name:</label>
                                         <input type="text" id="fname" 
-                                            name="fname" placeholder="Digite um nome" 
+                                            name="fname" placeholder="Type a name" 
                                             onChange={(e) => handleTeamSearch("name", e.target.value)}
                                         />
                                     </div>
                                     <div className="labelInputField">
-                                        <label>Chave:</label>
+                                        <label>Key:</label>
                                         <input type="text" id="lname" 
-                                            name="lname" placeholder="Digite uma chave"
+                                            name="lname" placeholder="Type a key"
                                             onChange={(e) => handleTeamSearch("key", e.target.value)}
                                         />
                                     </div>
                                     <div className="labelInputField">
-                                        <label>Cidade:</label>
+                                        <label>City:</label>
                                         <input type="text" id="lname" 
-                                            name="lname" placeholder="Digite uma cidade"
+                                            name="lname" placeholder="Type a city"
                                             onChange={(e) => handleTeamSearch("city", e.target.value)}
                                         />
                                     </div>
                                     <div className="labelInputField">
                                         <label>Conference:</label>
                                         <input type="text" id="lname" 
-                                            name="lname" placeholder="Digite uma conferência"
+                                            name="lname" placeholder="Type a conference"
                                             onChange={(e) => handleTeamSearch("conference", e.target.value)}
                                         />
                                     </div>
                                     <div className="labelInputField">
-                                        <label>Divisão:</label>
+                                        <label>Division:</label>
                                         <input type="text" id="lname" 
-                                            name="lname" placeholder="Digite uma divisão"
+                                            name="lname" placeholder="Type a division"
                                             onChange={(e) => handleTeamSearch("division", e.target.value)}
                                         />
                                     </div>
@@ -513,7 +495,7 @@ const Dashboard: React.FC = () => {
 
                             <div className="mediumPart">
                                 <h2>
-                                    Resultado
+                                    Result
                                 </h2>
                                 <div className="resultSearch">
                                     {   
@@ -532,9 +514,15 @@ const Dashboard: React.FC = () => {
                                     }
                                 </div>
                             </div>
-                            <h2>Comparando...</h2>
+                            <h2>Comparing...</h2>
                             <div className="barChartPart">
-                                <BarChart dataProps={dataProps} 
+                                <BarChart dataProps={teamDataPropsRow01} 
+                                    players={{firstPlayer: firstTeamSearchedWithStats.name,
+                                        secondPlayer: secondTeamSearchedWithStats.name }}
+                                />
+                            </div>
+                            <div className="barChartPart">
+                                <BarChart dataProps={teamDataPropsRow02} 
                                     players={{firstPlayer: firstTeamSearchedWithStats.name,
                                         secondPlayer: secondTeamSearchedWithStats.name }}
                                 />
@@ -542,54 +530,54 @@ const Dashboard: React.FC = () => {
                         </div>
 
                         <div className="divFieldsSeach">
-                            <strong>Jogadores</strong>
+                            <strong>Players</strong>
                             <form >
                                 <div className="labelInputField">
-                                    <label>Primeiro Nome:</label>
+                                    <label>First name:</label>
                                     <input type="text" id="fname" 
-                                        name="fname" placeholder="Primeiro Nome" 
+                                        name="fname" placeholder="Type the first name" 
                                         onChange={(e) => handlePlayerSearch("first_name", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>Último Nome:</label>
+                                    <label>Last name:</label>
                                     <input type="text" id="fname" 
-                                        name="fname" placeholder="Último Nome" 
+                                        name="fname" placeholder="Type the last name" 
                                         onChange={(e) => handlePlayerSearch("last_name", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>Altura:</label>
+                                    <label>Height:</label>
                                     <input type="text" id="fname" 
-                                        name="fname" placeholder="Altura" 
+                                        name="fname" placeholder="Type a height" 
                                         onChange={(e) => handlePlayerSearch("height", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>Peso:</label>
+                                    <label>Weight:</label>
                                     <input type="text" id="fname" 
-                                        name="fname" placeholder="Peso" 
+                                        name="fname" placeholder="Type a weight" 
                                         onChange={(e) => handlePlayerSearch("weight", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>Time (chave):</label>
+                                    <label>Team key:</label>
                                     <input type="text" id="lname" 
-                                        name="lname" placeholder="Time"
+                                        name="lname" placeholder="Type a key"
                                         onChange={(e) => handlePlayerSearch("team", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>Posição:</label>
+                                    <label>Position:</label>
                                     <input type="text" id="lname" 
-                                        name="lname" placeholder="Posição"
+                                        name="lname" placeholder="Type a position"
                                         onChange={(e) => handlePlayerSearch("position", e.target.value)}
                                     />
                                 </div>
                                 <div className="labelInputField">
-                                    <label>País:</label>
+                                    <label>Country:</label>
                                     <input type="text" id="lname" 
-                                        name="lname" placeholder="País"
+                                        name="lname" placeholder="Type a country"
                                         onChange={(e) => handlePlayerSearch("birth_state", e.target.value)}
                                     />
                                 </div>
@@ -597,7 +585,7 @@ const Dashboard: React.FC = () => {
 
                             <div className="mediumPart">
                                 <h2>
-                                    Resultado
+                                    Result
                                 </h2>
                                 <div className="resultSearch">
                                     {   
@@ -616,9 +604,15 @@ const Dashboard: React.FC = () => {
                                     }
                                 </div>
                             </div>
-                            <h2>Comparando...</h2>
+                            <h2>Comparing...</h2>
                             <div className="barChartPart">
-                                <BarChart dataProps={dataPlayerProps} 
+                                <BarChart dataProps={dataPlayerPropsRow01} 
+                                    players={{firstPlayer: firstPlayerSearchedWithStats.name,
+                                        secondPlayer: secondPlayerSearchedWithStats.name }}
+                                />
+                            </div>
+                            <div className="barChartPart">
+                                <BarChart dataProps={dataPlayerPropsRow02} 
                                     players={{firstPlayer: firstPlayerSearchedWithStats.name,
                                         secondPlayer: secondPlayerSearchedWithStats.name }}
                                 />
@@ -632,7 +626,7 @@ const Dashboard: React.FC = () => {
                 
                 <div className="lastPart">
                     <div className="teamsSectionDashboard">
-                        <strong>Times</strong>
+                        <strong>Teams</strong>
                         {allTeams.map((item: TeamDataProps, index: number) => {
 
                             return (
@@ -642,7 +636,7 @@ const Dashboard: React.FC = () => {
                         })}
                     </div>
                     <div className="playersSectionDashboard">
-                        <strong>Jogadores</strong>
+                        <strong>Players</strong>
                 
                         {playersInDatabase.slice(0,30).map((item: PlayerMoreDataProps, index: number) => {
 

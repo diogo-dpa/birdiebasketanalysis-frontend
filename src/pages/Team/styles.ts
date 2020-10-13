@@ -46,6 +46,14 @@ export const Container = styled.div`
                 padding: 15px 0;
             }
 
+            .kobeSection{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+
             .showPlayers{
                 display: flex;
                 flex-direction: row;
@@ -96,12 +104,15 @@ export const Container = styled.div`
                     font-size: 30px;
                     font-weight: 600;
                 }
+                span{
+                    font-size: 14px;
+                }
             }
         }
 
         .analysisSection{
             width: 100%;
-            height: 400px;
+            height: auto;
 
             display: flex;
             flex-direction: column;
@@ -113,6 +124,7 @@ export const Container = styled.div`
 
             .chartSection{
                 width: 100%;
+                height: auto;
             }
 
         }

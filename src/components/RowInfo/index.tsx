@@ -35,15 +35,17 @@ const RowInfo: React.FC<IRowInfoProps> = ( { data, firstSelected,
     const playerSelectedByClick = (player_id: number) => {
         
         if(!firstSelected && !secondSelected){
-            setFirstSelected(!firstSelected);
+            setFirstSelected(true);
             setFirstPlayerToCompare(player_id);
         }else if(firstSelected && !secondSelected){
-            setSecondSelected(!secondSelected);
+            setSecondSelected(true);
+            setSecondPlayerToCompare(player_id)
+        }else if(!firstSelected && secondSelected){
+            setSecondSelected(false);
             setSecondPlayerToCompare(player_id)
         }else if(firstSelected && secondSelected){
-            setFirstSelected(!firstSelected);
-        }else{
-            setSecondSelected(!secondSelected);
+            setFirstSelected(false);
+            setFirstPlayerToCompare(player_id);
         }
 
     };
